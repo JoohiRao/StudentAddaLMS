@@ -6,6 +6,9 @@ body {
   font-family: 'Urbanist', sans-serif;
 }
 
+body {
+  overflow-x: hidden;
+}
 
 
 :root {

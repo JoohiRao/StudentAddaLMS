@@ -10,12 +10,11 @@ interface NavItem {
   href: string;
 }
 
-const Navbar: React.FC = () => {
+export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Navigation items
   const navItems: NavItem[] = [
     { label: 'Home', href: '/' },
     { label: 'About Us', href: '/about' },
@@ -23,21 +22,15 @@ const Navbar: React.FC = () => {
     { label: 'Contact Us', href: '/contact' },
   ];
 
-  // Handle scroll event for navbar styling changes
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 10);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
@@ -52,7 +45,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav 
-      className={`w-full sticky top-0 z-50 transition-all duration-300 ${
+      className={`relative w-full top-0 z-50 transition-all duration-300 ${
         scrolled ? 'bg-[#ECE3DA]/95 shadow-md backdrop-blur-sm' : 'bg-[#ECE3DA]'
       }`}
       aria-label="Main navigation"
@@ -120,14 +113,14 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Menu - with smooth transition */}
+      {/* Mobile Menu - now overlays content */}
       <div
         id="mobile-menu"
-        className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden ${
-          isOpen ? 'max-h-[300px] opacity-100' : 'max-h-0 opacity-0'
-        }`}
+        className={`md:hidden absolute top-full left-0 w-full z-40 bg-[#ECE3DA] border-t border-[#435058]/10 shadow-md transition-all duration-300 ease-in-out ${
+          isOpen ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0 pointer-events-none'
+        } origin-top transform`}
       >
-        <div className="px-4 pb-4 pt-2 flex flex-col gap-3 font-semibold text-[#435058] bg-[#ECE3DA] border-t border-[#435058]/10">
+        <div className="px-4 pb-4 pt-2 flex flex-col gap-3 font-semibold text-[#435058]">
           {navItems.map((item, i) => (
             <Link
               key={i}
@@ -153,7 +146,7 @@ const Navbar: React.FC = () => {
               alt=""
               width={20}
               height={20}
-              className="w-5 h-5 object-contain"
+              className="w-5 h-6 object-contain"
               aria-hidden="true"
             />
           </button>
@@ -161,6 +154,4 @@ const Navbar: React.FC = () => {
       </div>
     </nav>
   );
-};
-
-export default Navbar;
+}

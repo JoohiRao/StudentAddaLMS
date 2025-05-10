@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, ChangeEvent, FormEvent } from 'react';
-import Navbar from './navbar';
+// import Navbar from './navbar';
 import Footer from './footer';
 import Image from 'next/image';
 
@@ -45,7 +45,7 @@ export default function ContactPage() {
 
   return (
     <div className="bg-[#ECE3DA] min-h-screen w-full">
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="max-w-6xl mx-auto px-4 mt-4 sm:px-6 lg:px-8 pt-8 pb-16">
 
         {/* Header */}
@@ -80,17 +80,17 @@ export default function ContactPage() {
           <div className="flex md:flex-col md:items-center space-x-4 md:space-x-0 md:space-y-4">
             {/* Face Icon */}
             <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 border-2 border-[#B7B7B7] rounded-full overflow-hidden">
-              <Image src="/home/face.png" alt="Social 1" className="w-4 h-4 filter grayscale brightness-0 object-cover" />
+              <Image src="/home/face.png" alt="Social 1" width={14} height={14} className="w-4 h-4 filter grayscale brightness-0 object-cover" />
             </div>
 
             {/* Tweet Icon */}
             <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 border-2 border-[#B7B7B7] rounded-full overflow-hidden">
-              <Image src="/home/tweet.png" alt="Social 2" className="w-4 h-4 filter grayscale brightness-0 object-cover" />
+              <Image src="/home/tweet.png" alt="Social 2"  width={14} height={14} className="w-4 h-4 filter grayscale brightness-0 object-cover" />
             </div>
 
             {/* LinkedIn Icon */}
             <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 border-2 border-[#B7B7B7] rounded-full overflow-hidden">
-              <Image src="/home/linked.png" alt="Social 3" className="w-4 h-4 filter grayscale brightness-0 object-cover" />
+              <Image src="/home/linked.png" alt="Social 3"  width={14} height={14} className="w-4 h-4 filter grayscale brightness-0 object-cover" />
             </div>
           </div>
         </div>

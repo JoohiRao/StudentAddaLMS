@@ -3,12 +3,19 @@ import { Geist, Geist_Mono } from "next/font/google";
 // import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Urbanist } from 'next/font/google';
+import { Plus_Jakarta_Sans } from 'next/font/google'
 
-export const urbanist = Urbanist({
+const urbanist = Urbanist({
   subsets: ['latin'],
   weight: ['400','500','600','700'], // or ['400', '500', '600', '700'] as needed
   variable: '--font-urbanist',
 });
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-plus-jakarta'
+})
 
 // const jakarta = Plus_Jakarta_Sans({
 //   subsets: ["latin"],
