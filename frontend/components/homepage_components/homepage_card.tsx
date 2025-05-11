@@ -75,7 +75,7 @@ export default function Cards1() {
       
       {/* Third card - full width for mobile, sm, and md, but matching card 1 & 2 style on lg */}
       <div className="w-full lg:ml-7 lg:max-w-xs">
-        {cardData.slice(2, 3).map((card, index) => (
+        {cardData.slice(2, 3).map((card: CardItem, index: number) => (
           <div
             key={index}
             className="bg-[#ECE3DA] w-full px-2 py-2 sm:p-5 rounded-xl transition duration-300 border-[0.6px] border-[#BF847EBD] flex flex-row sm:flex-col md:flex-row lg:flex-col"

@@ -1,12 +1,13 @@
-interface CardItem {
-  title: string;
-  description: string;
+
+type CardItem = {
+  title : string;
+  description : string;
   action: string;
 }
 
-interface Card3Props {
-  onlyFirstRow?: boolean;
-  onlyRemaining?: boolean;
+type Card3Props = {
+  onlyFirstRow ?: Boolean;
+  onlyRemaining ?: Boolean;
 }
 
 export default function Card3({ onlyFirstRow = false, onlyRemaining = false }: Card3Props) {
