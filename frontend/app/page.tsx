@@ -7,7 +7,7 @@ import Card4 from "@/components/homepage_components/homepage_card4";
 import Footer from "@/components/footer";
 import { ArrowRight } from "lucide-react";
 // import { plusJakarta } from './fonts';
-// import Intro from "@/pages/intro";
+import Intro from "@/pages/intro";
 
 
 export default function Home() {
@@ -19,7 +19,7 @@ export default function Home() {
       <main className="w-full px-4 sm:px-8 md:px-12 lg:px-20 xl:px-40 py-6 sm:py-4 md:py-14 lg:py-20">
         {/* Introduction to our website */}
 
-        {/* <Intro /> */}
+        <Intro />
         <Cards1 />
 
         {/* Advertisement Section */}

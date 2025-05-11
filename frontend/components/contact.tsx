@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, ChangeEvent, FormEvent } from 'react';
-import Navbar from './navbar';
-import Footer from './footer';
+import Navbar from '@/components/contact';
+import Footer from '@/components/footer'; 
 import Image from 'next/image';
 
 interface FormData {
