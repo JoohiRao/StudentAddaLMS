@@ -2,8 +2,8 @@ import Image from "next/image";
 
 export default function LocationCard() {
   return (
-    <div className="mt-10">
-      <h1 className="text-xl font-semibold mb-3">Location</h1>
+    <div className="mt-4 sm:mt-10">
+      <h1 className="text-[20px] sm:text-xl font-semibold mb-2 sm:mb-3">Location</h1>
 
       <div className="bg-[#D9D9D942] p-2 rounded-md overflow-hidden" style={{ height: "250px" }}>
         {/* Find on Map (Top 50%) */}

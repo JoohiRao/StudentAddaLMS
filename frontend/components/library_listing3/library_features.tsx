@@ -13,23 +13,24 @@ export default function LibraryFeatures() {
     ];
 
     return (
-        <div className=" py-3 px-4">
-            <h1 className="font-urbanist mb-3 font-semibold text-[29.17px] leading-[34.47px] tracking-[0.23px] flex items-center">
+        <div className=" py-3  px-1 sm:px-4">
+            <h1 className="font-urbanist mb-3 font-semibold text-[20px] sm:text-[29.17px] leading-[29px] sm:leading-[34.47px] tracking-[0.23px] flex items-center">
             Library Features
             </h1>
 
-            <div className="max-w-6xl mx-auto grid grid-cols-1  sm:grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="max-w-7xl mx-auto grid grid-cols-4  sm:grid-cols-2 md:grid-cols-4 gap-2 sm:gap-6">
                 {features.map((item, index) => (
-                    <div key={index} className="bg-[#D9D9D942] shadow-md rounded-xl p-4 flex flex-col items-center text-center">
-                        <div className="w-14 h-14  flex items-center justify-center relative mb-3 rounded-full overflow-hidden">
-                            <Image
-                                src={item.image}
-                                alt={item.text}
-                               width={23} height={23}
-                                className="object-contain"
-                            />
-                        </div>
-                        <p className="font-urbanist font-semibold text-[14.58px] leading-[17.23px] tracking-[0.12px] flex items-center justify-center text-center">
+                    <div key={index} className="bg-[#D9D9D942]  shadow-md rounded-xl p-2 sm:p-4 flex flex-col items-center text-center">
+                        <div className="w-6 h-6 sm:w-10 sm:h-10 flex items-center justify-center relative mb-1 sm:mb-3 overflow-hidden">
+                                    <Image
+                                        src={item.image}
+                                        alt={item.text}
+                                        width={24} // in pixels
+                                        height={24}
+                                        className="w-6 h-6 sm:w-10 sm:h-10 object-contain"
+                                    />
+                                </div>
+                        <p className="font-urbanist font-semibold  text-[8px] sm:text-[14.58px] leading-[8px] sm:leading-[17.23px] tracking-[0.12px] flex items-center justify-center text-center">
                                     {item.text}
                                     </p>
 

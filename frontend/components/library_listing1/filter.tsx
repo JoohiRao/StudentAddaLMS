@@ -1,17 +1,23 @@
+import react from 'react'
+
 export default function Filter(){
     return (
 
-        <div className="p-4 w-full lg:w-[30%] space-y-6">
-            <div className="flex justify-between items-center">
+        <div className="p-4 w-full  md:w-[20%] lg:w-[30%] space-y-2 lg:space-y-6">
+          <div className="flex justify-between
+          items-center">
               <div className="text-lg md:text-[19.65px] font-urbanist font-medium">
                 Filter
               </div>
               <div className="hidden">Map</div>
             </div>
+          <div className='flex flex-col gap-2  hidden sm:block sm:flex-row '>
+
+          
 
             {/* Location */}
             
-            <div>
+            <div className='' >
               <h1 className="font-urbanist font-medium text-[18px] mb-2">Location</h1>
               <input
                 type="text"
@@ -22,7 +28,7 @@ export default function Filter(){
 
             {/* Seats */}
             <div>
-              <h1 className="font-urbanist font-medium text-[18px] mb-2">Available Seats</h1>
+              <h1 className="font-urbanist  font-medium text-[18px] mb-2">Available Seats</h1>
               <div className="space-y-2">
                 {["5+ seats", "10+ seats", "20+ seats"].map((seat, index) => (
                   <label key={index} className="flex items-center gap-4">
@@ -67,6 +73,10 @@ export default function Filter(){
                 ))}
               </div>
             </div>
+
+
+          </div>
+            
           </div>
 
 

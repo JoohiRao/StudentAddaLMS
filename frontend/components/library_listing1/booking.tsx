@@ -58,13 +58,13 @@ export default function Booking({ selectedStep }: BookingProps) {
         )}
 
         <div className="mt-6 space-y-4 text-sm text-gray-500">
-          <div className="flex items-start">
-            <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" />
+          <div className="flex items-center justify-center">
+            {/* <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" /> */}
             <p>Secure Booking Guaranteed</p>
           </div>
-          <div className="flex items-start">
-            <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" />
-            <p>By proceeding, you agree to our Terms of Service and Cancellation Policy</p>
+          <div className="flex items-center justify-center">
+            {/* <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" /> */}
+            <p>By proceeding, you agree to our <span className='text-blue-800'>Terms of Service and Cancellation Policy</span></p>
           </div>
         </div>
       </div>

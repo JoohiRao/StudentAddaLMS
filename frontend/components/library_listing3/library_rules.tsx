@@ -35,28 +35,30 @@ export default function LibraryRules() {
     ];
 
     return (
-        <div className="w-full p-2">
-            <h1 className="font-urbanist font-semibold text-[29.17px] leading-[34.47px] tracking-[0.23px] flex items-center mb-4">
+        <div className="w-full mt-1 p-0 sm:p-2">
+            <h1 className="font-urbanist font-semibold text-[20px] sm:text-[29.17px] leading-[28px] sm:leading-[34.47px] tracking-[0.23px] flex items-center mb-1 sm:mb-4">
                 Library Rules
             </h1>
 
-            <div className=" w-full p-4 grid grid-cols-1 md:grid-cols-2 gap-4 rounded-xl">
+            <div className=" w-full p-1 sm:p-4 grid grid-cols-2 md:grid-cols-2 gap-1 sm:gap-4 rounded-xl">
                 {rules.map((rule, index) => (
-                    <div key={index} className="flex items-start gap-2 bg-white p-4 rounded-lg">
-                        <div className="w-16 h-16 relative">
-                            <Image
-                                src={rule.image}
-                                alt={rule.heading}
-                                width={30} height={30}
-                                className="object-contain"
-                            />
-                        </div>
+                    <div key={index} className="flex items-start gap-1 sm:gap-2 bg-white bg-red-200 p-1 sm:p-4 rounded-lg">
+                        <div className="w-6 h-6 sm:w-10 sm:h-10 relative">
+                                    <Image
+                                        src={rule.image}
+                                        alt={rule.heading}
+                                        width={24} // in pixels
+                                        height={24}
+                                        className="object-contain w-6 h-6 sm:w-10 sm:h-10"
+                                    />
+                                </div>
+
                         <div className="text">
-                        <h2 className="font-urbanist font-semibold text-[19.26px] leading-[22.76px] tracking-[0.15px] flex items-center">
+                        <h2 className="font-urbanist font-semibold text-[12px] sm:text-[19.26px] leading-[19px] sm:leading-[22.76px] tracking-[0.15px] flex items-center">
                                 {rule.heading}
                                 </h2>
 
-                                <p className="font-urbanist font-normal text-[14.77px] leading-[17.46px] tracking-[0.12px] flex items-center text-gray-700 mt-1">
+                                <p className="font-urbanist font-normal text-[10px] sm:text-[14.77px] leading-[11px] sm:leading-[17.46px] tracking-[0.12px] flex items-center text-gray-700 mt-0 sm:mt-1">
                                 {rule.paragraph}
                                 </p>
 

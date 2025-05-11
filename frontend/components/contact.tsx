@@ -1,9 +1,10 @@
 'use client';
 
 import { useState, ChangeEvent, FormEvent } from 'react';
-import Navbar from '@/components/contact';
-import Footer from '@/components/footer'; 
+// import Navbar from './navbar';
+import Footer from './footer';
 import Image from 'next/image';
+import Navbar from './navbar';
 
 interface FormData {
   name: string;
@@ -80,17 +81,17 @@ export default function ContactPage() {
           <div className="flex md:flex-col md:items-center space-x-4 md:space-x-0 md:space-y-4">
             {/* Face Icon */}
             <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 border-2 border-[#B7B7B7] rounded-full overflow-hidden">
-              <Image src="/home/face.png" alt="Social 1" className="w-4 h-4 filter grayscale brightness-0 object-cover" />
+              <Image src="/home/face.png" alt="Social 1" width={14} height={14} className="w-4 h-4 filter grayscale brightness-0 object-cover" />
             </div>
 
             {/* Tweet Icon */}
             <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 border-2 border-[#B7B7B7] rounded-full overflow-hidden">
-              <Image src="/home/tweet.png" alt="Social 2" className="w-4 h-4 filter grayscale brightness-0 object-cover" />
+              <Image src="/home/tweet.png" alt="Social 2"  width={14} height={14} className="w-4 h-4 filter grayscale brightness-0 object-cover" />
             </div>
 
             {/* LinkedIn Icon */}
             <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 border-2 border-[#B7B7B7] rounded-full overflow-hidden">
-              <Image src="/home/linked.png" alt="Social 3" className="w-4 h-4 filter grayscale brightness-0 object-cover" />
+              <Image src="/home/linked.png" alt="Social 3"  width={14} height={14} className="w-4 h-4 filter grayscale brightness-0 object-cover" />
             </div>
           </div>
         </div>
