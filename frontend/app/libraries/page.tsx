@@ -32,7 +32,7 @@ export default function AllLibraries() {
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <p className="font-urbanist hidden sm:block font-medium text-[18px]">1,2314 Results</p>
 
-              <div className="flex hidden sm:block items-center space-x-2">
+              <div className="hidden sm:block items-center space-x-2">
                 <p className="text-sm font-urbanist">Sort by</p>
                 <div className="relative flex items-center">
                   <select className="bg-transparent border px-4 py-2 rounded text-sm font-urbanist text-gray-700 cursor-pointer">

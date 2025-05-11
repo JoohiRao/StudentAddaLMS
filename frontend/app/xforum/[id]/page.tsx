@@ -11,15 +11,15 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
-import { Navbar } from "@/components/navbar"
-import { Footer } from "@/components/footer"
+import  Navbar  from "@/components/navbar"
+import  Footer  from "@/components/footer"
 import { mockForumService } from "@/lib/mock-api/forum-service"
 import type { ForumCategory, ForumComment, ForumPost } from "@/types/forum"
 import { useAuth } from "@/lib/auth-provider"
 import { useToast } from "@/components/ui/use-toast"
 
 export default function ForumPostPage() {
-  const { id } = useParams()
+  const { id } = useParams<number>()
   const router = useRouter()
   const { user } = useAuth()
   const { toast } = useToast()
