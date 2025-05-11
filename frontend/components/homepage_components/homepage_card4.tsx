@@ -57,7 +57,7 @@ export default function Card4() {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 px-4 sm:px-6 md:px-12 lg:px-24 justify-items-center">
-      {cards.map((card, index) => (
+      {cards.map((card: CardItem, index) => (
         <div
           key={index}
           className="bg-[#FBF5E9] p-5 sm:p-6 md:p-8 rounded-2xl shadow-md hover:shadow-xl transition duration-300 text-left w-full max-w-xs sm:max-w-sm md:max-w-md"
