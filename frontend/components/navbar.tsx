@@ -64,9 +64,9 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           <Link href="/" aria-label="StudentAdda Home">
             <div className="flex items-center gap-2">
-              <BookOpen className="h-6 w-6 text-[#435058]" />
+              {/* <BookOpen className="h-6 w-6 text-[#435058]" /> */}
               <Image
-                src="/home/logo.png"
+                src="/logo.svg"
                 width={158}
                 height={28}
                 alt="StudentAdda Logo"
@@ -145,7 +145,7 @@ export default function Navbar() {
                     Sign Up
                   </span>
                   <Image
-                    src="/home/signin.png"
+                    src="/signin.svg"
                     alt=""
                     width={20}
                     height={20}
@@ -180,7 +180,7 @@ export default function Navbar() {
                 <Link href="/" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
                   <BookOpen className="h-6 w-6 text-[#435058]" />
                   <Image
-                    src="/home/logo.png"
+                    src="/logo.svg"
                     width={120}
                     height={24}
                     alt="StudentAdda Logo"
@@ -245,7 +245,7 @@ export default function Navbar() {
                         >
                           <span>Sign Up</span>
                           <Image
-                            src="/home/signin.png"
+                            src="/signin.svg"
                             alt=""
                             width={20}
                             height={20}

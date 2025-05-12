@@ -4,6 +4,9 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
 import { AuthProvider } from "@/lib/auth-provider"
 import "./globals.css"
+import { Nav } from "react-day-picker"
+import Footer from "@/components/footer"
+import Navbar from "@/components/navbar"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -23,7 +26,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <AuthProvider>
+            <Navbar />
             {children}
+            <Footer />
             <Toaster />
           </AuthProvider>
         </ThemeProvider>
