@@ -317,8 +317,11 @@ export const mockELibraryService = {
     const newBook: Book = {
       id: `book-${books.length + 1}`,
       ...bookData,
+      rating: bookData.rating || 0,
+      reviewCount: bookData.reviewCount || 0,
     }
 
+    // Add book to books array
     books.push(newBook)
 
     // Update category book count

@@ -74,12 +74,12 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="container flex h-screen w-screen flex-col items-center justify-center">
+    <div className=" flex h-screen w-full flex-col items-center justify-center bg-[#ECE3DA]">
       <Link href="/" className="absolute left-4 top-4 md:left-8 md:top-8 flex items-center gap-2">
         <BookOpen className="h-6 w-6" />
         <span className="font-bold">LibraryHub</span>
       </Link>
-      <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+      <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[550px]">
         <Card>
           <CardHeader className="space-y-1">
             <CardTitle className="text-2xl text-center">Login</CardTitle>
@@ -123,7 +123,7 @@ export default function LoginPage() {
                     required
                   />
                 </div>
-                <Button type="submit" className="w-full" disabled={isLoading}>
+                <Button type="submit" className="w-full bg-slate-500" disabled={isLoading}>
                   {isLoading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />

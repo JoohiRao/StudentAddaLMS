@@ -82,27 +82,88 @@ export default function SeatBookingPage() {
   // Sort dates in descending order (newest first)
   const sortedDates = Object.keys(bookingsByDate).sort((a, b) => new Date(b).getTime() - new Date(a).getTime())
 
-  const handleCancelBooking = (bookingId: string) => {
-    // In a real app, this would call an API to cancel the booking
-    toast({
-      title: "Booking Cancelled",
-      description: `Booking ${bookingId.slice(0, 8)} has been cancelled.`,
-    })
+  const handleCancelBooking = async (bookingId: string) => {
+    try {
+      // Find the booking
+      const booking = bookings.find((b) => b.id === bookingId)
+      if (!booking) return
 
-    // Update local state to reflect the cancellation
-    setBookings(bookings.map((booking) => (booking.id === bookingId ? { ...booking, status: "cancelled" } : booking)))
+      // Update booking status
+      const updatedBooking = { ...booking, status: "cancelled" }
+
+      // In a real app, this would call an API to cancel the booking
+      // For now, we'll simulate the API call with a delay
+      await delay(500)
+
+      // Update the library's available seats count
+      if (user?.libraryId) {
+        const library = await mockLibraryService.getLibrary(user.libraryId)
+        if (library) {
+          await mockLibraryService.updateLibrary(user.libraryId, {
+            availableSeats: library.availableSeats + 1,
+          })
+        }
+      }
+
+      toast({
+        title: "Booking Cancelled",
+        description: `Booking ${bookingId.slice(0, 8)} has been cancelled.`,
+      })
+
+      // Update local state to reflect the cancellation
+      setBookings(bookings.map((b) => (b.id === bookingId ? updatedBooking : b)))
+    } catch (error) {
+      console.error("Error cancelling booking:", error)
+      toast({
+        title: "Error",
+        description: "Failed to cancel booking",
+        variant: "destructive",
+      })
+    }
   }
 
-  const handleCompleteBooking = (bookingId: string) => {
-    // In a real app, this would call an API to mark the booking as completed
-    toast({
-      title: "Booking Completed",
-      description: `Booking ${bookingId.slice(0, 8)} has been marked as completed.`,
-    })
+  const handleCompleteBooking = async (bookingId: string) => {
+    try {
+      // Find the booking
+      const booking = bookings.find((b) => b.id === bookingId)
+      if (!booking) return
 
-    // Update local state to reflect the completion
-    setBookings(bookings.map((booking) => (booking.id === bookingId ? { ...booking, status: "completed" } : booking)))
+      // Update booking status
+      const updatedBooking = { ...booking, status: "completed" }
+
+      // In a real app, this would call an API to mark the booking as completed
+      // For now, we'll simulate the API call with a delay
+      await delay(500)
+
+      // Update the library's available seats count
+      if (user?.libraryId) {
+        const library = await mockLibraryService.getLibrary(user.libraryId)
+        if (library) {
+          await mockLibraryService.updateLibrary(user.libraryId, {
+            availableSeats: library.availableSeats + 1,
+          })
+        }
+      }
+
+      toast({
+        title: "Booking Completed",
+        description: `Booking ${bookingId.slice(0, 8)} has been marked as completed.`,
+      })
+
+      // Update local state to reflect the completion
+      setBookings(bookings.map((b) => (b.id === bookingId ? updatedBooking : b)))
+    } catch (error) {
+      console.error("Error completing booking:", error)
+      toast({
+        title: "Error",
+        description: "Failed to complete booking",
+        variant: "destructive",
+      })
+    }
   }
+
+  // Add a delay function
+  const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
   // Get today's bookings for the "Today's Bookings" tab
   const today = new Date().toISOString().split("T")[0]

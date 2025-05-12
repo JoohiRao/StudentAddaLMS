@@ -112,10 +112,22 @@ export default function InventoryPage() {
     }
 
     try {
+      // Convert string values to appropriate types
+      const bookToAdd = {
+        ...newBook,
+        publishedYear: Number(newBook.publishedYear),
+        pageCount: Number(newBook.pageCount),
+        rating: 0,
+        reviewCount: 0,
+        libraryId: user?.libraryId || "",
+      }
+
       // In a real app, this would add the book to the database
+      const addedBook = await mockELibraryService.addBook(bookToAdd as Omit<Book, "id">)
+
       toast({
         title: "Book Added",
-        description: `"${newBook.title}" has been added to the inventory.`,
+        description: `"${addedBook.title}" has been added to the inventory.`,
       })
 
       // Reset form and close dialog
@@ -135,14 +147,12 @@ export default function InventoryPage() {
       })
       setIsAddDialogOpen(false)
 
-      // Simulate adding the book to the list
-      const newBookWithId: Book = {
-        id: `book-${Date.now()}`,
-        ...(newBook as any),
-        publishedYear: Number(newBook.publishedYear),
-        pageCount: Number(newBook.pageCount),
-      }
-      setBooks([...books, newBookWithId])
+      // Add the new book to the books state
+      setBooks([...books, addedBook])
+
+      // Refetch categories to update book counts
+      const updatedCategories = await mockELibraryService.getCategories()
+      setCategories(updatedCategories)
     } catch (error) {
       console.error("Error adding book:", error)
       toast({

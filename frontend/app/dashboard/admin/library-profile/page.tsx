@@ -108,6 +108,13 @@ export default function LibraryProfilePage() {
     setSaving(true)
     try {
       await mockLibraryService.updateLibrary(user.libraryId, formData)
+
+      // Update the local library state to reflect changes immediately
+      setLibrary((prev) => {
+        if (!prev) return null
+        return { ...prev, ...formData } as Library
+      })
+
       toast({
         title: "Success",
         description: "Library profile updated successfully",
@@ -126,7 +133,7 @@ export default function LibraryProfilePage() {
 
   if (loading) {
     return (
-      <div className="flex h-full items-center justify-center">
+      <div className="flex h-full w-full items-center justify-center">
         <div className="flex flex-col items-center gap-2">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
           <p className="text-lg font-medium">Loading library profile...</p>
@@ -137,7 +144,7 @@ export default function LibraryProfilePage() {
 
   if (!library) {
     return (
-      <div className="flex h-full items-center justify-center">
+      <div className="flex h-full w-full items-center justify-center">
         <div className="flex flex-col items-center gap-2">
           <p className="text-lg font-medium">Library not found</p>
           <Button variant="outline" onClick={() => router.push("/dashboard/admin")}>
@@ -149,27 +156,27 @@ export default function LibraryProfilePage() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col gap-2">
+    <div className="container mx-0 max-w-none px-0">
+      <div className="flex flex-col gap-2 mb-6">
         <h1 className="text-3xl font-bold tracking-tight">Library Profile</h1>
         <p className="text-muted-foreground">Manage your library's information and settings</p>
       </div>
 
-      <Tabs defaultValue="general">
-        <TabsList className="mb-4">
+      <Tabs defaultValue="general" className="w-full">
+        <TabsList className="w-full mb-6 grid grid-cols-4">
           <TabsTrigger value="general">General Information</TabsTrigger>
           <TabsTrigger value="amenities">Amenities</TabsTrigger>
           <TabsTrigger value="hours">Opening Hours</TabsTrigger>
           <TabsTrigger value="images">Images</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="general" className="space-y-4">
-          <Card>
-            <CardHeader>
+        <TabsContent value="general" className="mt-0">
+          <Card className="w-full border-0 shadow-none">
+            <CardHeader className="px-0">
               <CardTitle>Basic Information</CardTitle>
               <CardDescription>Update your library's basic details</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-6 px-0">
               <div className="space-y-2">
                 <Label htmlFor="name">Library Name</Label>
                 <Input
@@ -178,6 +185,7 @@ export default function LibraryProfilePage() {
                   value={formData.name || ""}
                   onChange={handleInputChange}
                   placeholder="Enter library name"
+                  className="w-full"
                 />
               </div>
               <div className="space-y-2">
@@ -189,6 +197,7 @@ export default function LibraryProfilePage() {
                   onChange={handleInputChange}
                   placeholder="Describe your library"
                   rows={4}
+                  className="w-full"
                 />
               </div>
               <div className="space-y-2">
@@ -199,9 +208,10 @@ export default function LibraryProfilePage() {
                   value={formData.address || ""}
                   onChange={handleInputChange}
                   placeholder="Enter library address"
+                  className="w-full"
                 />
               </div>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="totalSeats">Total Seats</Label>
                   <Input
@@ -211,6 +221,7 @@ export default function LibraryProfilePage() {
                     value={formData.totalSeats || ""}
                     onChange={handleInputChange}
                     placeholder="Enter total seats"
+                    className="w-full"
                   />
                 </div>
                 <div className="space-y-2">
@@ -222,6 +233,7 @@ export default function LibraryProfilePage() {
                     value={formData.availableSeats || ""}
                     onChange={handleInputChange}
                     placeholder="Enter available seats"
+                    className="w-full"
                   />
                 </div>
               </div>
@@ -229,14 +241,14 @@ export default function LibraryProfilePage() {
           </Card>
         </TabsContent>
 
-        <TabsContent value="amenities" className="space-y-4">
-          <Card>
-            <CardHeader>
+        <TabsContent value="amenities" className="mt-0">
+          <Card className="w-full border-0 shadow-none">
+            <CardHeader className="px-0">
               <CardTitle>Amenities</CardTitle>
               <CardDescription>Select the amenities available at your library</CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <CardContent className="px-0">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
                 {(Object.keys(amenityLabels) as LibraryAmenity[]).map((amenity) => (
                   <div key={amenity} className="flex items-center space-x-2">
                     <Checkbox
@@ -258,16 +270,16 @@ export default function LibraryProfilePage() {
           </Card>
         </TabsContent>
 
-        <TabsContent value="hours" className="space-y-4">
-          <Card>
-            <CardHeader>
+        <TabsContent value="hours" className="mt-0">
+          <Card className="w-full border-0 shadow-none">
+            <CardHeader className="px-0">
               <CardTitle>Opening Hours</CardTitle>
               <CardDescription>Set your library's operating hours</CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
+            <CardContent className="px-0">
+              <div className="space-y-6">
                 {Object.keys(library.openingHours).map((day) => (
-                  <div key={day} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  <div key={day} className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                     <div className="space-y-2">
                       <Label htmlFor={`${day}-open`} className="capitalize">
                         {day} Opening Time
@@ -277,6 +289,7 @@ export default function LibraryProfilePage() {
                         type="time"
                         value={formData.openingHours?.[day as keyof typeof formData.openingHours]?.open || ""}
                         onChange={(e) => handleOpeningHoursChange(day, "open", e.target.value)}
+                        className="w-full"
                       />
                     </div>
                     <div className="space-y-2">
@@ -288,6 +301,7 @@ export default function LibraryProfilePage() {
                         type="time"
                         value={formData.openingHours?.[day as keyof typeof formData.openingHours]?.close || ""}
                         onChange={(e) => handleOpeningHoursChange(day, "close", e.target.value)}
+                        className="w-full"
                       />
                     </div>
                   </div>
@@ -297,14 +311,14 @@ export default function LibraryProfilePage() {
           </Card>
         </TabsContent>
 
-        <TabsContent value="images" className="space-y-4">
-          <Card>
-            <CardHeader>
+        <TabsContent value="images" className="mt-0">
+          <Card className="w-full border-0 shadow-none">
+            <CardHeader className="px-0">
               <CardTitle>Library Images</CardTitle>
               <CardDescription>Upload and manage images of your library</CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+            <CardContent className="px-0">
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 {library.images.map((image, index) => (
                   <div key={index} className="relative aspect-square overflow-hidden rounded-md border">
                     <Image
@@ -343,8 +357,8 @@ export default function LibraryProfilePage() {
         </TabsContent>
       </Tabs>
 
-      <div className="flex justify-end">
-        <Button onClick={handleSave} disabled={saving}>
+      <div className="flex justify-end mt-8">
+        <Button onClick={handleSave} disabled={saving} size="lg">
           {saving ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />

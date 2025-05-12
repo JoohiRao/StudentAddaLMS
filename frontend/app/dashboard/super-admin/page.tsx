@@ -198,7 +198,7 @@ export default function SuperAdminDashboardPage() {
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {/* Platform Growth */}
-        <Card>
+        <Card className="overflow-hidden">
           <CardHeader>
             <CardTitle>Platform Growth</CardTitle>
             <CardDescription>Member and library growth over the past 12 months</CardDescription>

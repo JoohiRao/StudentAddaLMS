@@ -1,4 +1,4 @@
-import type { Library, LibraryAmenity, Seat, SeatBooking } from "@/types/library"
+import type { Library, LibraryAmenity, Seat, SeatBooking, Book } from "@/types/library"
 
 // Mock libraries data
 const libraries: Library[] = [
@@ -227,6 +227,31 @@ const bookings: SeatBooking[] = [
   },
 ]
 
+// Mock books data
+const books: Book[] = [
+  {
+    id: "book-1",
+    title: "The Lord of the Rings",
+    author: "J.R.R. Tolkien",
+    genre: "Fantasy",
+    isAvailable: true,
+  },
+  {
+    id: "book-2",
+    title: "The Hobbit",
+    author: "J.R.R. Tolkien",
+    genre: "Fantasy",
+    isAvailable: true,
+  },
+  {
+    id: "book-3",
+    title: "The Silmarillion",
+    author: "J.R.R. Tolkien",
+    genre: "Fantasy",
+    isAvailable: false,
+  },
+]
+
 // Simulate API delay
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
@@ -310,7 +335,18 @@ export const mockLibraryService = {
       createdAt: new Date().toISOString(),
     }
 
+    // Add booking to bookings array
     bookings.push(newBooking)
+
+    // Update seat availability
+    seat.isAvailable = false
+
+    // Update library available seats count
+    const library = libraries.find((lib) => lib.id === bookingData.libraryId)
+    if (library && library.availableSeats > 0) {
+      library.availableSeats -= 1
+    }
+
     return newBooking
   },
 
@@ -344,5 +380,59 @@ export const mockLibraryService = {
     }
 
     return libraries[libraryIndex]
+  },
+
+  // Borrow a book
+  borrowBook: async (bookId: string, userId: string): Promise<Book> => {
+    await delay(800) // Simulate network delay
+
+    // Find the book
+    const bookIndex = books.findIndex((b) => b.id === bookId)
+    if (bookIndex === -1) {
+      throw new Error("Book not found")
+    }
+
+    // Check if book is available
+    if (!books[bookIndex].isAvailable) {
+      throw new Error("Book is not available")
+    }
+
+    // Update book availability
+    books[bookIndex] = {
+      ...books[bookIndex],
+      isAvailable: false,
+    }
+
+    // Create a borrowing record (in a real app, this would be stored in a database)
+    const borrowing = {
+      id: `borrow-${Date.now()}`,
+      bookId,
+      userId,
+      borrowDate: new Date().toISOString(),
+      dueDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(), // 14 days from now
+      returnDate: null,
+      status: "borrowed",
+    }
+
+    return books[bookIndex]
+  },
+
+  // Return a book
+  returnBook: async (bookId: string): Promise<Book> => {
+    await delay(800) // Simulate network delay
+
+    // Find the book
+    const bookIndex = books.findIndex((b) => b.id === bookId)
+    if (bookIndex === -1) {
+      throw new Error("Book not found")
+    }
+
+    // Update book availability
+    books[bookIndex] = {
+      ...books[bookIndex],
+      isAvailable: true,
+    }
+
+    return books[bookIndex]
   },
 }

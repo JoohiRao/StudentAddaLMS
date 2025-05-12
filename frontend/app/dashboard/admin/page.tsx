@@ -201,7 +201,7 @@ export default function AdminDashboardPage() {
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {/* Occupancy Rate */}
-        <Card className="col-span-1">
+        <Card className="col-span-1 overflow-hidden">
           <CardHeader>
             <CardTitle>Occupancy Rate</CardTitle>
             <CardDescription>Seat occupancy over the past 30 days</CardDescription>

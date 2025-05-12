@@ -55,7 +55,7 @@ export default function Navbar() {
   return (
     <nav 
       className={`sticky w-full top-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-[#ECE3DA]/95 shadow-md backdrop-blur-sm' : 'bg-[#ECE3DA]'
+        scrolled ? 'bg-[#ECE3DA]/90 shadow-md backdrop-blur-sm' : 'bg-[#ECE3DA]'
       }`}
       aria-label="Main navigation"
     >
