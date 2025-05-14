@@ -1,24 +1,24 @@
 import express from 'express';
+import authRoutes from './routes/authRoutes';
 import dotenv from 'dotenv';
 
-
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-const port = process.env.PORT || '5000';
+dotenv.config();
 
 const app = express();
-
 app.use(express.json());
 
-app.get('/', (req,res) => {
-    res.send('Hello World');
-})
+// Routes
+app.use('/api/auth', authRoutes);
 
-
-app.get('/api', (req, res) => {
-    res.json({ message: 'Hello from the API!' });
-});
-
+// Default test route
+app.get('/', (_req, res) => {
+    res.send('API is running...');
+  });
+  
+  // Server start
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
 
 export default app;
-
-
