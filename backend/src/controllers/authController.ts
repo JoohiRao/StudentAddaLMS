@@ -1,7 +1,13 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import prisma from '../lib/prisma';
-import { generateToken } from '../utils/generateToken';
+
+// temporary-code
+declare module 'express-session' {
+  interface SessionData {
+    userId?: string;
+  }
+}
 
 export const register = async (req: Request, res: Response): Promise<void> => {
   const { name, email, password, confirmPassword } = req.body;
@@ -24,16 +30,18 @@ export const register = async (req: Request, res: Response): Promise<void> => {
       data: { name, email, password: hashedPassword },
     });
 
+    // Store user ID in session
+    req.session.userId = user.id;
+
     res.status(201).json({
       success: true,
       message: 'User registered successfully',
-      user: { id: user.id, name: user.name, email: user.email, role: user.role },
+      user: { id: user.id, name: user.name, email: user.email, role: user.role }
     });
   } catch (error: any) {
     res.status(500).json({ success: false, message: 'Server error', error: error.message });
   }
 };
-
 
 export const login = async (req: Request, res: Response): Promise<void> => {
   const { email, password } = req.body;
@@ -51,12 +59,12 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    const token = generateToken({ id: user.id, email: user.email, role: user.role });
+    // Store user ID in session
+    req.session.userId = user.id;
 
     res.status(200).json({
       success: true,
       message: 'Login successful',
-      token,
       user: {
         id: user.id,
         name: user.name,
@@ -70,8 +78,13 @@ export const login = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-
-export const logout = async (_req: Request, res: Response): Promise<void> => {
-  // For stateless JWT, just clear it from frontend
-  res.status(200).json({ success: true, message: 'Logout successful' });
+export const logout = async (req: Request, res: Response): Promise<void> => {
+  req.session.destroy(err => {
+    if (err) {
+      res.status(500).json({ success: false, message: 'Logout failed' });
+    } else {
+      res.clearCookie('connect.sid');
+      res.status(200).json({ success: true, message: 'Logged out successfully' });
+    }
+  });
 };
